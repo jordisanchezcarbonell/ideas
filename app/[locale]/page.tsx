@@ -1,13 +1,17 @@
 import { fetchAnime } from './action';
 
-import LoadMore from '../components/LoadMore';
+import LoadMore from '../../components/LoadMore';
 import AnimeCard, { AnimeProp } from '@/components/AnimeCard';
 import { data } from './_data';
+import { getTranslations } from 'next-intl/server';
+
 async function Home() {
   //const data = await fetchAnime(1);
+  const t = await getTranslations('Index');
 
   return (
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
+      <h1>{t('title')}</h1>
       <h2 className="text-3xl text-white font-bold">Explore Anime</h2>
       <div className="relative w-64 h-48 rounded-lg overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-50 filter grayscale"></div>
