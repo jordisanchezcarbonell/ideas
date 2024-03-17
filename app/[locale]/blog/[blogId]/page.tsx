@@ -75,10 +75,7 @@ export async function generateStaticParams() {
   return response;
 }
 export default async function Blog({ params }: BlogProps) {
-  console.log('1----', params);
-  console.log('2----', params.blogId);
   const response = data.find((item) => item.slug === params.blogId);
-  console.log('3----', response);
 
   return (
     <div className="p-4">

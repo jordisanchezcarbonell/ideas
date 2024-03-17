@@ -10,20 +10,8 @@ async function Home() {
   const t = await getTranslations('Index');
   return (
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
-      <h1>{t('title')}</h1>
-      <h2 className="text-3xl text-white font-bold">Explore Anime</h2>
-      <div className="relative w-64 h-48 rounded-lg overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-50 filter grayscale"></div>
-        <div className="absolute inset-0 flex justify-center items-center z-10">
-          <p className="text-white">Texto centrado blanco</p>
-        </div>
-      </div>
-      <div className="relative w-64 h-48 rounded-lg overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="absolute inset-0 flex justify-center items-center z-10">
-          <p className="text-white">Texto centrado blanco</p>
-        </div>
-      </div>
+      <h2 className="text-3xl text-white font-bold">{t('title')}</h2>
+
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
         {data.map((item: AnimeProp, index: number) => (
           <AnimeCard key={item.slug} anime={item} index={index} />
