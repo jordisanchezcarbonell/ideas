@@ -9,6 +9,7 @@ import { Analytics } from '@vercel/analytics/react';
 import 'node_modules/flag-icons/css/flag-icons.min.css';
 import SelectorIdioma from '@/components/LocaleSwitcherSelect';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const dmSans = DM_Sans({ subsets: ['latin'] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
           <Footer />
         </main>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
