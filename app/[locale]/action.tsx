@@ -32,9 +32,9 @@ export async function fetchStrapi(page: number, local: string) {
   return [];
 }
 
-export async function fetchStrapiBySlug(slug: string) {
+export async function fetchStrapiBySlug(slug: string, local: string) {
   const response = await fetch(
-    `https://poc-strapi-nextjs.onrender.com/api/contents?filters[Slug][$eq]=${slug}&locale=es`,
+    `https://poc-strapi-nextjs.onrender.com/api/contents?filters[Slug][$eq]=${slug}&locale=${local}`,
     options
   );
 

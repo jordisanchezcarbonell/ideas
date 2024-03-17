@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import a from 'next/link';
 
 export interface AnimeProp {
   Title: string;
@@ -14,7 +14,7 @@ interface Prop {
 
 function AnimeCard({ attributes }: Prop) {
   return (
-    <Link
+    <a
       className="max-w-sm rounded relative w-full hover:before:bg-redborder-red-500 hover:text-white hover:shadow-red-500 hover:before:left-0 hover:before:w-full transform transition duration-500 ease-in-out hover:scale-105"
       href={`/blog/${attributes.Slug}`}
     >
@@ -24,7 +24,7 @@ function AnimeCard({ attributes }: Prop) {
           <p className="text-white"> {attributes.Title}</p>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }
 

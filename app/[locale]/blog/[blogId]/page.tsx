@@ -6,6 +6,7 @@ import { locales } from '@/config';
 type BlogProps = {
   params: {
     blogId: string;
+    locale: string;
   };
 };
 
@@ -13,8 +14,7 @@ export async function generateMetadata({
   params,
 }: BlogProps): Promise<Metadata> {
   // read route params
-
-  const data = await fetchStrapiBySlug(params.blogId);
+  const data = await fetchStrapiBySlug(params.blogId, params.locale);
   const attributesDetalle = data[0].attributes;
   if (!attributesDetalle) {
     return {
@@ -83,7 +83,7 @@ export async function generateStaticParams() {
   return results;
 }
 export default async function Blog({ params }: BlogProps) {
-  const data = await fetchStrapiBySlug(params.blogId);
+  const data = await fetchStrapiBySlug(params.blogId, params.locale);
 
   const attributesDetalle = data[0].attributes;
 
