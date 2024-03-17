@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export interface AnimeProp {
-  id: string;
-  name: string;
+  title: string;
   slug: string;
+  caption: string;
 }
 
 interface Prop {
@@ -21,7 +21,7 @@ function AnimeCard({ anime }: Prop) {
       <div className="relative w-full h-[37vh] opacity-50">
         <div className="absolute inset-0 bg-black bg-opacity-50 filter grayscale"></div>
         <div className="absolute inset-0 flex justify-center items-center z-10">
-          <p className="text-white"> {anime.name}</p>
+          <p className="text-white"> {anime.title}</p>
         </div>
       </div>
     </Link>

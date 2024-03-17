@@ -8,7 +8,6 @@ import { getTranslations } from 'next-intl/server';
 async function Home() {
   //const data = await fetchAnime(1);
   const t = await getTranslations('Index');
-
   return (
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
       <h1>{t('title')}</h1>
@@ -27,7 +26,7 @@ async function Home() {
       </div>
       <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
         {data.map((item: AnimeProp, index: number) => (
-          <AnimeCard key={item.id} anime={item} index={index} />
+          <AnimeCard key={item.slug} anime={item} index={index} />
         ))}
       </section>
       <LoadMore />

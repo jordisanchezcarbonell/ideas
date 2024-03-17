@@ -20,8 +20,8 @@ export async function generateMetadata({
     };
   }
   return {
-    title: response.name,
-    description: response.name,
+    title: response.title,
+    description: response.title,
     generator: 'Next.js',
     applicationName: 'Next.js',
     referrer: 'origin-when-cross-origin',
@@ -102,10 +102,10 @@ export default async function Blog({ params }: BlogProps) {
         </Link>
       </button>
 
-      {response && response.text && (
+      {response && response.caption && (
         <div
           className="whitespace-pre-line"
-          dangerouslySetInnerHTML={{ __html: response.text }}
+          dangerouslySetInnerHTML={{ __html: response.caption }}
         />
       )}
     </div>
