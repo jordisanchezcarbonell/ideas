@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
+    "@vercel/analytics": "^1.2.2",
     "flag-icons": "^7.2.0",
     "next": "14.0.3",
     "next-intl": "^3.9.5",
