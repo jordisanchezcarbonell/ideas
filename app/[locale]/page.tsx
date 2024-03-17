@@ -4,6 +4,21 @@ import LoadMore from '../../components/LoadMore';
 import AnimeCard, { AnimeProp } from '@/components/AnimeCard';
 //import { data } from './_data';
 import { getTranslations } from 'next-intl/server';
+import { locales } from '@/config';
+
+export async function generateStaticParams() {
+  const x = locales.map((locale) => ({ locale }));
+  const promises = x.map(async (item) => {
+    const data = await fetchStrapi(1, item.locale);
+    return data.map((row: { attributes: { Slug: any } }) => ({
+      blogId: row.attributes.Slug,
+      locale: item.locale, // Usamos el locale de este item
+    }));
+  });
+  const results = await Promise.all(promises);
+  // Flatten the array of arrays into a single array
+  return results;
+}
 
 async function Home({ params: { locale } }: { params: { locale: string } }) {
   const data = await fetchStrapi(1, locale);
