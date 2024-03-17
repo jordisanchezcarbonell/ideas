@@ -33,8 +33,20 @@ export async function fetchStrapi(page: number, local: string) {
 }
 
 export async function fetchStrapiBySlug(slug: string) {
+  console.log('1---', slug);
   const response = await fetch(
-    `https://poc-strapi-nextjs.onrender.com/api/contents?locale=es?filters[Slug][$eq]=${slug}`,
+    `https://poc-strapi-nextjs.onrender.com/api/contents?filters[Slug][$eq]=${slug}&locale=es`,
+    options
+  );
+
+  const data = await response.json();
+
+  return data.data;
+}
+
+export async function fetchAllSlugs() {
+  const response = await fetch(
+    `https://poc-strapi-nextjs.onrender.com/api/contents?fields=Slug`,
     options
   );
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { fetchStrapiBySlug } from '../../action';
+import { fetchAllSlugs, fetchStrapiBySlug } from '../../action';
 import { data } from '../../_data';
 
 type BlogProps = {
@@ -69,14 +69,20 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams({ params }: BlogProps) {
-  const data = await fetchStrapiBySlug(params.blogId);
-  const attributesDetalle = data[0].attributes;
-  return attributesDetalle.Slug;
+export async function generateStaticParams() {
+  const data = await fetchAllSlugs();
+  const attributesDetalle = data.map((row: { attributes: { Slug: any } }) => ({
+    Slug: row.attributes.Slug,
+  }));
+  return data.map((row: { attributes: { Slug: any } }) => ({
+    slug: row.attributes.Slug,
+  }));
 }
 export default async function Blog({ params }: BlogProps) {
   const data = await fetchStrapiBySlug(params.blogId);
+
   const attributesDetalle = data[0].attributes;
+
   return (
     <div className="p-4">
       <button
