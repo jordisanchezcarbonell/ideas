@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
-import { data } from '../../_data';
 import Link from 'next/link';
+import { fetchStrapiBySlug } from '../../action';
+import { data } from '../../_data';
 
 type BlogProps = {
   params: {
@@ -13,15 +14,16 @@ export async function generateMetadata({
 }: BlogProps): Promise<Metadata> {
   // read route params
 
-  const response = data.find((item) => item.slug === params.blogId);
-  if (!response) {
+  const data = await fetchStrapiBySlug(params.blogId);
+  const attributesDetalle = data[0].attributes;
+  if (!attributesDetalle) {
     return {
       title: 'not found',
     };
   }
   return {
-    title: response.title,
-    description: response.title,
+    title: attributesDetalle.Title,
+    description: attributesDetalle.Title,
     generator: 'Next.js',
     applicationName: 'Next.js',
     referrer: 'origin-when-cross-origin',
@@ -67,16 +69,14 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  const response = data.map((item) => {
-    id: item.slug;
-  });
-
-  return response;
+export async function generateStaticParams({ params }: BlogProps) {
+  const data = await fetchStrapiBySlug(params.blogId);
+  const attributesDetalle = data[0].attributes;
+  return attributesDetalle.Slug;
 }
 export default async function Blog({ params }: BlogProps) {
-  const response = data.find((item) => item.slug === params.blogId);
-
+  const data = await fetchStrapiBySlug(params.blogId);
+  const attributesDetalle = data[0].attributes;
   return (
     <div className="p-4">
       <button
@@ -88,12 +88,12 @@ export default async function Blog({ params }: BlogProps) {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke="currentColor"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
           />
         </svg>
@@ -102,10 +102,10 @@ export default async function Blog({ params }: BlogProps) {
         </Link>
       </button>
 
-      {response && response.caption && (
+      {attributesDetalle && attributesDetalle.Content && (
         <div
           className="whitespace-pre-line"
-          dangerouslySetInnerHTML={{ __html: response.caption }}
+          dangerouslySetInnerHTML={{ __html: attributesDetalle.Content }}
         />
       )}
     </div>
