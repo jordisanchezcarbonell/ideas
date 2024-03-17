@@ -70,18 +70,19 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const x = locales.map((locale) => ({ locale }));
-  const promises = x.map(async (item) => {
-    const data = await fetchAllSlugsE(item.locale);
+  const promises = locales.map(async (locale) => {
+    const data = await fetchAllSlugsE(locale);
+    console;
     return data.map((row: { attributes: { Slug: any } }) => ({
       blogId: row.attributes.Slug,
-      locale: item.locale, // Usamos el locale de este item
+      locale: locale,
     }));
   });
-  const results = await Promise.all(promises);
+  const results: any = await Promise.all(promises);
   // Flatten the array of arrays into a single array
-  return results;
+  return results.flat();
 }
+
 export default async function Blog({ params }: BlogProps) {
   const data = await fetchStrapiBySlug(params.blogId, params.locale);
 

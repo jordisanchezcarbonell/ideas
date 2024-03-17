@@ -50,6 +50,5 @@ export async function fetchAllSlugsE(locale: string) {
   );
 
   const data = await response.json();
-
   return data.data;
 }
