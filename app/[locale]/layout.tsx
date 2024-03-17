@@ -10,19 +10,28 @@ import 'node_modules/flag-icons/css/flag-icons.min.css';
 import SelectorIdioma from '@/components/LocaleSwitcherSelect';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 const dmSans = DM_Sans({ subsets: ['latin'] });
 
+type LocaleProps = {
+  locale: string;
+};
+
 export const metadata: Metadata = {
-  title: 'Anime Vault',
-  description: 'Your favorite anime, all in one place.',
+  title: 'Refrexiones',
+  description: 'Tus refrexiones favoritas',
 };
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: LocaleProps;
 }) {
+  unstable_setRequestLocale(locale);
+
   return (
     <html lang="en">
       <body className={dmSans.className}>
